@@ -11,8 +11,9 @@ node_flag = 0;
 element_flag = 0;
 
 fid = fopen(file);
-
 data = fgetl(fid);
+%% Gmsh网格接口
+if(strtrim(data) == "$MeshFormat")
 while(data ~= -1)
     if(data == "$Nodes" && ~node_flag)
         FormatString=repmat('%f',1,4);
@@ -59,6 +60,37 @@ while(data ~= -1)
     end
     data = fgetl(fid);
 end
+%% Ansys Maxwell网格接口
+elseif(strtrim(data) == "$begin '$base_index$'")
+while(data ~= -1)
+    if(strtrim(data) == "$begin 'points'")
+        for ii = 1:3
+            data = fgetl(fid);
+        end
+        matches = regexp(data, '[-+]?\d*\.?\d+(?:[eE][-+]?\d+)?', 'match');
+        numOfNodes = str2double(matches);
+        coord = zeros(numOfNodes, 5);
+        for ii = 1:numOfNodes
+            data = fgetl(fid);
+            matches = regexp(data, '[-+]?\d*\.?\d+(?:[eE][-+]?\d+)?', 'match');
+            coord(ii, :) = str2double(matches);
+        end
+        coord(:, 1) = [];
+    end
+    if(strtrim(data) == "$begin 'elements'")
+        data = fgetl(fid);
+        Element = [];
+        while(strtrim(data) ~= "$end 'elements'")
+            matches = regexp(data, '[-+]?\d*\.?\d+(?:[eE][-+]?\d+)?', 'match');
+            Element = [Element; str2double(matches)];
+            data = fgetl(fid);
+        end 
+    end
+    data = fgetl(fid);
+end
+end
+
+
 % save('meshInf.mat', 'coord', 'element');
 fclose(fid);
 element_P = element(isnan(element(:, 4)), 1:3);  %点单元

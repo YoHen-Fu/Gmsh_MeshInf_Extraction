@@ -1,5 +1,7 @@
 # Gmsh网格源文件解析程序
 
+## 由于MATLAB性能受限，因此后续三维网格提取以及其他功能将在新仓库中更新，详见：[斗沙片刻/ShowMesh](https://gitee.com/YoHen-Fu/show-mesh)
+
 ## 介绍
 
 MeshInf可一键提取Gmsh网格源文件中的信息，并生成`MeshInf.mat`数据文件，方便利用Gmsh划分好的网格进行后续处理。
