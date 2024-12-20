@@ -35,3 +35,16 @@ MeshInf可一键提取Gmsh网格源文件中的信息，并生成`MeshInf.mat`�
 `element_V`：包含线单元信息，矩阵一共5列，第1列为体单元所属实体编号，第2列为体单元编号，后4列为体单元4个结点局部编号对应的全局编号。
 
 特别说明：一维网格，不存在面单元以及体单元，element_S与element_V两个矩阵为空，同理二维网格，不存在体单元，element_V矩阵为空。
+
+**如果本项目有帮到你，不妨请我喝杯奶茶**
+
+<p align="center">
+<img src="https://gitee.com/YoHen-Fu/ip-matrix/raw/master/figures/%E6%88%91%E7%9A%84%E6%94%B6%E6%AC%BE%E7%A0%81-%E5%BE%AE%E4%BF%A1.png" width="35%">
+</p>
+
+**欢迎关注我的公众号**
+
+<p align="center">
+<img src="https://gitee.com/YoHen-Fu/ip-matrix/raw/master/figures/%E6%88%91%E7%9A%84%E5%85%AC%E4%BC%97%E5%8F%B7.png" width="50%">
+</p>
+
